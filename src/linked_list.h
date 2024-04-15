@@ -31,6 +31,22 @@ template <typename T> class LinkedList
 public:
     LinkedList() : length_(0), head_(nullptr) {}
 
+    bool push_front(const T& new_data)
+    {
+        if (head_ != nullptr) {
+            std::unique_ptr<LinkedListNode<T>> new_node_ptr =
+                std::make_unique<LinkedListNode<T>>(new_data);
+            head_.swap(new_node_ptr);
+            head_.get()->next_ = std::move(new_node_ptr);
+        } else {
+            head_ = std::make_unique<LinkedListNode<T>>(new_data);
+        }
+        length_++;
+        // don't know why this will fail atm. but leaving option open.
+        return true;
+    }
+    
+    /// accessors
     size_t get_length() const { return length_; }
 
     T at(size_t index) const
@@ -54,19 +70,6 @@ public:
         return p->data_;
     }
 
-    bool push_front(const T& new_data)
-    {
-        if (head_ != nullptr) {
-            std::unique_ptr<LinkedListNode<T>> new_node_ptr =
-                std::make_unique<LinkedListNode<T>>(new_data);
-            head_.swap(new_node_ptr);
-            head_.get()->next_ = std::move(new_node_ptr);
-        } else {
-            head_ = std::make_unique<LinkedListNode<T>>(new_data);
-        }
-        length_++;
-        return true;
-    }
 };
 
 #endif
