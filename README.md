@@ -6,18 +6,18 @@ informing on this importance are correct. Correctness doesn't imply painless.
 #### **Singley Linked List**: `linked_list.h`
 - Each node is allocated separately on the heap.
 
-| Method    | $O(n)$  |
+| Method    | Worst Case Complexly  |
 | -------- | ------- |
-| `bool push_front(const T&)`  | $O(1)$ |
-| `bool push_back(const T&)`  | $O(n)$ |
-| `T pop_front()`  | $O(1)$ |
-| `T pop_back()`  | $O(n)$ |
-| `T delete_at(size_t)`  | $O(n)$ |
-| `bool contains(const T&) const`  | $O(n)$ |
+| `bool push_front(const T&)`                    | $O(1)$ |
+| `bool push_back(const T&)`                     | $O(n)$ |
+| `T pop_front()`                                | $O(1)$ |
+| `T pop_back()`                                 | $O(n)$ |
+| `T delete_at(size_t)`                          | $O(n)$ |
+| `bool contains(const T&) const`                | $O(n)$ |
 | `std::optinal<size_t> index_of(size_t) const`  | $O(n)$ |
-| `size_t get_length() const`  | $O(1)$ |
-| `T at(size_t) const`  | $O(n)$ |
-| `T& operator[](size_t)`  | $O(n)$ |
+| `size_t get_length() const`                    | $O(1)$ |
+| `T at(size_t) const`                           | $O(n)$ |
+| `T& operator[](size_t)`                        | $O(n)$ |
 
 
 ### Project goals
