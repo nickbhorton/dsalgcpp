@@ -1,6 +1,6 @@
-In the world of a computer science student the importance of data structures 
+*In the world of a computer science student the importance of data structures 
 and algorithms is repeatedly beaten into you. To be fair, teachers and mentors 
-informing on this importance are correct. Correctness doesn't imply painless.
+informing on this importance are correct. Correctness doesn't imply painless.*
 
 ### Implementations
 #### **Singley Linked List**: `linked_list.h`
