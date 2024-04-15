@@ -11,8 +11,12 @@ TEST_CASE("linked list node constructor and accessors")
 TEST_CASE("linked list can be default constructed")
 {
     LinkedList<int> ll{};
-
     REQUIRE(ll.get_length() == 0);
+}
+
+TEST_CASE("push_front adds an element at the front")
+{
+    LinkedList<int> ll{};
     ll.push_front(1);
     REQUIRE(ll.get_length() == 1);
     CHECK(ll.at(0) == 1);
@@ -25,18 +29,33 @@ TEST_CASE("linked list can be default constructed")
     CHECK(ll.at(0) == 131);
     CHECK(ll.at(1) == 97);
     CHECK(ll.at(2) == 1);
-    SUBCASE("at throws") {
-        CHECK_THROWS_AS(ll.at(3), std::out_of_range);
-    }
-    SUBCASE("operator[] can also be used for access")
-    {
-        CHECK(ll[0] == 131);
-        CHECK(ll[1] == 97);
-        CHECK(ll[2] == 1);
-    }
-    SUBCASE("operator[] can mutate list")
-    {
-        ll[2] = -100;
-        CHECK(ll[2] == -100);
-    }
+}
+
+TEST_CASE("at accesor is bounds checked and it will throw")
+{
+    LinkedList<int> ll{};
+    CHECK_THROWS_AS(ll.at(3), std::out_of_range);
+}
+TEST_CASE("operator[] can also be used for access")
+{
+    LinkedList<int> ll{};
+    ll.push_front(1);
+    ll.push_front(97);
+    ll.push_front(131);
+    REQUIRE(ll.get_length() == 3);
+    CHECK(ll[0] == 131);
+    CHECK(ll[1] == 97);
+    CHECK(ll[2] == 1);
+}
+
+TEST_CASE("operator[] can mutate list")
+{
+    LinkedList<int> ll{};
+    ll.push_front(1);
+    ll.push_front(97);
+    ll.push_front(131);
+    REQUIRE(ll.get_length() == 3);
+    CHECK(ll[2] == 1);
+    ll[2] = -100;
+    CHECK(ll[2] == -100);
 }
