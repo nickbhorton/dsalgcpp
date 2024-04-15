@@ -222,7 +222,8 @@ TEST_CASE("delete_at removes and return element at index")
     }
 }
 
-TEST_CASE("the to_string function allows seperator specification"){
+TEST_CASE("the to_string function allows seperator specification")
+{
     LinkedList<int> ll{};
     ll.push_back(1);
     ll.push_back(2);
@@ -233,7 +234,8 @@ TEST_CASE("the to_string function allows seperator specification"){
     CHECK(std::string("1 SEP 2 SEP 3 SEP 4") == ll.to_string(" SEP "));
 }
 
-TEST_CASE("move constructor and move operator are defined"){
+TEST_CASE("move constructor and move operator are defined")
+{
     LinkedList<int> ll1{};
     ll1.push_back(1);
     ll1.push_back(2);
@@ -248,10 +250,35 @@ TEST_CASE("move constructor and move operator are defined"){
     CHECK(std::string("") == ll1.to_string());
     CHECK(std::string("1 2 3 4") == ll2.to_string());
 
-    LinkedList<int> ll3 {};
+    LinkedList<int> ll3{};
     ll3 = std::move(ll2);
     CHECK(ll2.get_length() == 0);
     CHECK(ll3.get_length() == 4);
     CHECK(std::string("") == ll2.to_string());
     CHECK(std::string("1 2 3 4") == ll3.to_string());
+}
+
+TEST_CASE("insert adds an element at index")
+{
+    LinkedList<int> ll{};
+    ll.push_back(0);
+    ll.push_back(2);
+    ll.push_back(3);
+    CHECK(std::string("0 2 3") == ll.to_string());
+    ll.insert(1, 1);
+    CHECK(ll.get_length() == 4);
+    CHECK(std::string("0 1 2 3") == ll.to_string());
+
+    ll.insert(0, -1);
+    CHECK(ll.get_length() == 5);
+    CHECK(std::string("-1 0 1 2 3") == ll.to_string());
+
+    ll.insert(5, 4);
+    CHECK(ll.get_length() == 6);
+    CHECK(std::string("-1 0 1 2 3 4") == ll.to_string());
+
+    SUBCASE("insert will throw if index is out of range")
+    {
+        CHECK_THROWS_AS(ll.insert(100, 1), std::out_of_range);
+    }
 }

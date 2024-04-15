@@ -10,6 +10,7 @@ informing on this importance are correct. Correctness doesn't imply painless.*
 | -------- | ------- |
 | `bool push_front(const T&)`                    | $O(1)$ |
 | `bool push_back(const T&)`                     | $O(n)$ |
+| `bool insert(size_t, const T&)`                | $O(n)$ |
 | `T pop_front()`                                | $O(1)$ |
 | `T pop_back()`                                 | $O(n)$ |
 | `T delete_at(size_t)`                          | $O(n)$ |
@@ -18,6 +19,7 @@ informing on this importance are correct. Correctness doesn't imply painless.*
 | `size_t get_length() const`                    | $O(1)$ |
 | `T at(size_t) const`                           | $O(n)$ |
 | `T& operator[](size_t)`                        | $O(n)$ |
+| `std::string to_string(std::string_view)`      | $O(n)$ |
 
 
 ### Project goals

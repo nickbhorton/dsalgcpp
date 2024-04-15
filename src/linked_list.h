@@ -48,6 +48,28 @@ public:
     LinkedList(const LinkedList& other) = delete;
     LinkedList& operator=(const LinkedList& other) = delete;
 
+    bool insert(size_t index, const T& new_data)
+    {
+        auto new_node = std::make_unique<LinkedListNode<T>>(new_data);
+        if (index > length_) {
+            throw std::out_of_range("linked list index out of range");
+        } else if (index == 0) {
+            // seems like this is a generic thing that should have a function
+            new_node.get()->next_ = std::move(head_);
+            head_ = std::move(new_node);
+        } else {
+            LinkedListNode<T>* pb = head_.get();
+            for (size_t i = 0; i < index - 1; i++) {
+                pb = pb->get_next();
+            }
+            new_node.get()->next_ = std::move(pb->next_);
+            pb->next_ = std::move(new_node);
+        }
+
+        length_++;
+        return true;
+    }
+
     bool push_front(const T& new_data)
     {
         if (head_ != nullptr) {
