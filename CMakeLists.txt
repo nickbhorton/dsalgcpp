@@ -36,3 +36,7 @@ add_executable(linked_list src/linked_list.cc)
 target_include_directories(linked_list PUBLIC ${DOCTEST_INCLUDE_DIR})
 doctest_discover_tests(linked_list)
 
+add_executable(stack src/stack.cc)
+target_include_directories(stack PUBLIC ${DOCTEST_INCLUDE_DIR})
+doctest_discover_tests(stack)
+

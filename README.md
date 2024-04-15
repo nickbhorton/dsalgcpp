@@ -21,6 +21,15 @@ informing on this importance are correct. Correctness doesn't imply painless.*
 | `T& operator[](size_t)`                        | $O(n)$ |
 | `std::string to_string(std::string_view)`      | $O(n)$ |
 
+#### **Basic Stack**: `stack.h`
+- Uses singley linked list to implement. Eventually I want to be able to choose the implementation detail with the template.
+
+| Method    | Worst Case Complexly  |
+| -------- | ------- |
+| `bool push(const T&)`         | $O(1)$ |
+| `T pop()`                     | $O(1)$ |
+| `size_t size() const`         | $O(1)$ |
+
 
 ### Project goals
 I have programmed in c++ for the mojority of my development time. This does 
