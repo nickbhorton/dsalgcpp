@@ -28,13 +28,11 @@ ExternalProject_Add(
 # Expose required variable (DOCTEST_INCLUDE_DIR) to parent scope
 ExternalProject_Get_Property(doctest source_dir)
 set(DOCTEST_INCLUDE_DIR ${source_dir}/doctest CACHE INTERNAL "Path to include folder for doctest")
+include(${source_dir}/scripts/cmake/doctest.cmake)
+
+enable_testing()
 
 add_executable(linked_list src/linked_list.cc)
 target_include_directories(linked_list PUBLIC ${DOCTEST_INCLUDE_DIR})
-
-enable_testing()
-add_test(
-    NAME linked_list_test
-    COMMAND linked_list
-)
+doctest_discover_tests(linked_list)
 
