@@ -1,7 +1,6 @@
 #ifndef LINKED_LIST_HEADER
 #define LINKED_LIST_HEADER
 #include <algorithm>
-#include <cassert>
 #include <memory>
 #include <optional>
 #include <stdexcept>
@@ -32,6 +31,22 @@ template <typename T> class LinkedList
 
 public:
     LinkedList() : length_(0), head_(nullptr) {}
+    LinkedList(LinkedList&& other)
+        : length_(other.length_), head_(std::move(other.head_))
+    {
+        other.length_ = 0;
+    }
+    LinkedList& operator=(LinkedList&& other)
+    {
+        std::swap(head_, other.head_);
+        length_ = other.length_;
+        other.length_ = 0;
+        return *this;
+    };
+
+    // Deleted copy stuff for now
+    LinkedList(const LinkedList& other) = delete;
+    LinkedList& operator=(const LinkedList& other) = delete;
 
     bool push_front(const T& new_data)
     {
@@ -190,6 +205,27 @@ public:
         };
         return p->data_;
     }
+
+    std::string to_string(std::string_view sep = " ")
+    {
+        std::stringstream ss;
+        LinkedListNode<T>* p = head_.get();
+        while (p != nullptr) {
+            if (p->get_next() == nullptr) {
+                ss << p->get_data();
+            } else {
+                ss << p->get_data() << sep;
+            }
+            p = p->get_next();
+        }
+        return ss.str();
+    }
 };
 
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const LinkedList<T>& ll)
+{
+    os << ll.to_string(" ");
+    return os;
+}
 #endif

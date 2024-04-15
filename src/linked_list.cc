@@ -221,3 +221,37 @@ TEST_CASE("delete_at removes and return element at index")
         CHECK_THROWS_AS(ll.delete_at(100), std::out_of_range);
     }
 }
+
+TEST_CASE("the to_string function allows seperator specification"){
+    LinkedList<int> ll{};
+    ll.push_back(1);
+    ll.push_back(2);
+    ll.push_back(3);
+    ll.push_back(4);
+    CHECK(std::string("1 2 3 4") == ll.to_string());
+    CHECK(std::string("1;2;3;4") == ll.to_string(";"));
+    CHECK(std::string("1 SEP 2 SEP 3 SEP 4") == ll.to_string(" SEP "));
+}
+
+TEST_CASE("move constructor and move operator are defined"){
+    LinkedList<int> ll1{};
+    ll1.push_back(1);
+    ll1.push_back(2);
+    ll1.push_back(3);
+    ll1.push_back(4);
+    CHECK(ll1.get_length() == 4);
+    CHECK(std::string("1 2 3 4") == ll1.to_string());
+
+    LinkedList<int> ll2(std::move(ll1));
+    CHECK(ll2.get_length() == 4);
+    CHECK(ll1.get_length() == 0);
+    CHECK(std::string("") == ll1.to_string());
+    CHECK(std::string("1 2 3 4") == ll2.to_string());
+
+    LinkedList<int> ll3 {};
+    ll3 = std::move(ll2);
+    CHECK(ll2.get_length() == 0);
+    CHECK(ll3.get_length() == 4);
+    CHECK(std::string("") == ll2.to_string());
+    CHECK(std::string("1 2 3 4") == ll3.to_string());
+}
