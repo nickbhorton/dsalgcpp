@@ -72,73 +72,17 @@ public:
 
     bool push_front(const T& new_data)
     {
-        if (head_ != nullptr) {
-            std::unique_ptr<LinkedListNode<T>> new_node_ptr =
-                std::make_unique<LinkedListNode<T>>(new_data);
-            head_.swap(new_node_ptr);
-            head_.get()->next_ = std::move(new_node_ptr);
-        } else {
-            head_ = std::make_unique<LinkedListNode<T>>(new_data);
-        }
-        length_++;
-        // don't know why this will fail atm. but leaving option open.
-        return true;
+        return insert(0, new_data);
     }
 
     bool push_back(const T& new_data)
     {
-        if (head_ == nullptr) {
-            head_ = std::make_unique<LinkedListNode<T>>(new_data);
-            length_++;
-            return true;
-        }
-        LinkedListNode<T>* pf = head_.get();
-        LinkedListNode<T>* pb = head_.get();
-
-        while (pf != nullptr) {
-            pb = pf;
-            pf = pf->get_next();
-        }
-        pb->next_ = std::make_unique<LinkedListNode<T>>(new_data);
-        length_++;
-        return true;
-    }
-
-    T pop_front()
-    {
-        if (length_ == 0) {
-            throw std::out_of_range("linked list index out of range");
-        }
-        std::unique_ptr<LinkedListNode<T>> e = std::move(head_);
-        head_ = std::move(e.get()->next_);
-        length_--;
-        return e.get()->get_data();
-    }
-
-    T pop_back()
-    {
-        if (length_ == 0) {
-            throw std::out_of_range("linked list index out of range");
-        } else if (length_ == 1) {
-            std::unique_ptr<LinkedListNode<T>> p = std::move(head_);
-            length_--;
-            return p.get()->get_data();
-        }
-        LinkedListNode<T>* pf = head_.get();
-        LinkedListNode<T>* pb = head_.get();
-
-        while (pf->get_next() != nullptr) {
-            pb = pf;
-            pf = pf->get_next();
-        }
-        std::unique_ptr<LinkedListNode<T>> p = std::move(pb->next_);
-        length_--;
-        return p.get()->get_data();
+        return insert(length_, new_data);
     }
 
     T delete_at(size_t index)
     {
-        if (index >= length_) {
+        if (index >= length_ || length_ == 0) {
             throw std::out_of_range("linked list index out of range");
         }
         if (index == 0) {
@@ -176,6 +120,34 @@ public:
         length_--;
         return val;
     }
+
+    T pop_front()
+    {
+        return delete_at(0);
+    }
+
+    // TODO refactor with delete_at
+    T pop_back()
+    {
+        if (length_ == 0) {
+            throw std::out_of_range("linked list index out of range");
+        } else if (length_ == 1) {
+            std::unique_ptr<LinkedListNode<T>> p = std::move(head_);
+            length_--;
+            return p.get()->get_data();
+        }
+        LinkedListNode<T>* pf = head_.get();
+        LinkedListNode<T>* pb = head_.get();
+
+        while (pf->get_next() != nullptr) {
+            pb = pf;
+            pf = pf->get_next();
+        }
+        std::unique_ptr<LinkedListNode<T>> p = std::move(pb->next_);
+        length_--;
+        return p.get()->get_data();
+    }
+
 
     bool contains(const T& value) const
     {
