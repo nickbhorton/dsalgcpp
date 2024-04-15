@@ -3,8 +3,11 @@ and algorithms is repeatedly beaten into you. To be fair, teachers and mentors
 informing on this importance are correct. Correctness doesn't imply painless.
 
 ### Implementations
-#### *Singley Linked List*: "linked_list.h"
+#### **Singley Linked List**: `linked_list.h`
 - Each node is allocated separately on the heap.
+| Method    | $O(n)$ |
+| -------- | ------- |
+| `push_front`  | O(1) |
 
 ### Project goals
 I have programmed in c++ for the mojority of my development time. This does 
