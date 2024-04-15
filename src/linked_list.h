@@ -140,7 +140,7 @@ public:
         return val;
     }
 
-    bool contains(const T& value)
+    bool contains(const T& value) const
     {
         LinkedListNode<T>* p = head_.get();
         while (p != nullptr) {
@@ -152,7 +152,7 @@ public:
         return false;
     }
 
-    std::optional<size_t> index_of(const T& value)
+    std::optional<size_t> index_of(const T& value) const
     {
         LinkedListNode<T>* p = head_.get();
         size_t counter = 0;
