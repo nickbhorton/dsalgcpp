@@ -18,7 +18,7 @@ public:
         return s.pop_front();
     }
     size_t size() const {
-        return s.get_length();
+        return s.length();
     }
 };
 

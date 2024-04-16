@@ -3,8 +3,8 @@
 #include <algorithm>
 #include <memory>
 #include <optional>
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 template <typename T> class ArrayList
 {
@@ -116,7 +116,7 @@ public:
     }
 
     /// accessors
-    size_t get_length() const { return length_; }
+    size_t length() const { return length_; }
 
     T at(size_t index) const
     {

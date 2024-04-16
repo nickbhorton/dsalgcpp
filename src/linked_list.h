@@ -124,26 +124,9 @@ public:
         return delete_at(0);
     }
 
-    // TODO refactor with delete_at
     T pop_back()
     {
-        if (length_ == 0) {
-            throw std::out_of_range("linked list index out of range");
-        } else if (length_ == 1) {
-            std::unique_ptr<LinkedListNode<T>> p = std::move(head_);
-            length_--;
-            return p.get()->get_data();
-        }
-        LinkedListNode<T>* pf = head_.get();
-        LinkedListNode<T>* pb = head_.get();
-
-        while (pf->get_next() != nullptr) {
-            pb = pf;
-            pf = pf->get_next();
-        }
-        std::unique_ptr<LinkedListNode<T>> p = std::move(pb->next_);
-        length_--;
-        return p.get()->get_data();
+        return delete_at(length_ - 1);
     }
 
 
@@ -174,7 +157,7 @@ public:
     }
 
     /// accessors
-    size_t get_length() const { return length_; }
+    size_t length() const { return length_; }
 
     T at(size_t index) const
     {

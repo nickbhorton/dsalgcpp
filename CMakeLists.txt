@@ -31,6 +31,7 @@ add_executable(tests
     src/linked_list.cc 
     src/array_list.cc
     src/stack.cc
+    src/queue.cc
 )
 target_include_directories(tests PUBLIC ${DOCTEST_INCLUDE_DIR})
 
