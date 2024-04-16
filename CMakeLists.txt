@@ -5,38 +5,36 @@ project(dsalgcpp
     LANGUAGES CXX
 )
 add_compile_options(
-    -g
-    -Wall
-    -Werror
+    $<$<CONFIG:Debug>:-g>
+    $<$<CONFIG:Debug>:-Wall>
+    $<$<CONFIG:Debug>:-Werror>
 )
+message(${CMAKE_BUILD_TYPE})
 
-include(ExternalProject)
+include(FetchContent)
 find_package(Git REQUIRED)
 
-ExternalProject_Add(
+FetchContent_Declare(
     doctest
-    PREFIX ${CMAKE_BINARY_DIR}/doctest
+    SOURCE_DIR ${CMAKE_BINARY_DIR}/doctest
     GIT_REPOSITORY https://github.com/doctest/doctest.git
-    TIMEOUT 10
-    UPDATE_COMMAND ${GIT_EXECUTABLE} pull
+    GIT_TAG origin/master 
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
     INSTALL_COMMAND ""
-    LOG_DOWNLOAD ON
 )
+FetchContent_MakeAvailable(doctest)
+set(DOCTEST_INCLUDE_DIR ${CMAKE_BINARY_DIR}/doctest/doctest)
 
-# Expose required variable (DOCTEST_INCLUDE_DIR) to parent scope
-ExternalProject_Get_Property(doctest source_dir)
-set(DOCTEST_INCLUDE_DIR ${source_dir}/doctest CACHE INTERNAL "Path to include folder for doctest")
-include(${source_dir}/scripts/cmake/doctest.cmake)
-
-enable_testing()
+include(${CMAKE_BINARY_DIR}/doctest/scripts/cmake/doctest.cmake)
 
 add_executable(linked_list src/linked_list.cc)
 target_include_directories(linked_list PUBLIC ${DOCTEST_INCLUDE_DIR})
-doctest_discover_tests(linked_list)
 
 add_executable(stack src/stack.cc)
 target_include_directories(stack PUBLIC ${DOCTEST_INCLUDE_DIR})
+
+enable_testing()
+doctest_discover_tests(linked_list)
 doctest_discover_tests(stack)
 
