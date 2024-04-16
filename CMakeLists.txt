@@ -32,6 +32,7 @@ add_executable(tests
     tests/array_list.cc
     tests/stack.cc
     tests/queue.cc
+    tests/binary_tree.cc
 )
 target_include_directories(tests PUBLIC ${DOCTEST_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/src)
 
