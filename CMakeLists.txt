@@ -28,12 +28,12 @@ set(DOCTEST_INCLUDE_DIR ${CMAKE_BINARY_DIR}/doctest/doctest)
 include(${CMAKE_BINARY_DIR}/doctest/scripts/cmake/doctest.cmake)
 
 add_executable(tests 
-    src/linked_list.cc 
-    src/array_list.cc
-    src/stack.cc
-    src/queue.cc
+    tests/linked_list.cc 
+    tests/array_list.cc
+    tests/stack.cc
+    tests/queue.cc
 )
-target_include_directories(tests PUBLIC ${DOCTEST_INCLUDE_DIR})
+target_include_directories(tests PUBLIC ${DOCTEST_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/src)
 
 
 enable_testing()

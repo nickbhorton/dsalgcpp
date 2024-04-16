@@ -6,7 +6,6 @@ informing us of this importance are correct. Being correct often times isn't
 pain free.*
 
 ## Implementations
-### Basics
 #### **Basic Stack**: `stack.h`
 - Template takes type T aka the type of the elements and also a type List\<T\>.
 The required method interface for `List` class is `push_front(const T&)`, 
