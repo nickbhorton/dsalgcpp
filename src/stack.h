@@ -4,9 +4,9 @@
 #include "doctest.h"
 
 #include <cstddef>
-template <typename T, typename Storage> class Stack
+template <typename T, typename List> class Stack
 {
-    Storage s;
+    List s;
 
 public:
     Stack() : s() {}

@@ -2,11 +2,38 @@
 
 *In the world of a computer science student the importance of data structures 
 and algorithms is repeatedly beaten into you. To be fair, teachers and mentors 
-informing on this importance are correct. Correctness doesn't imply painless.*
+informing us of this importance are correct. Being correct often times isn't 
+pain free.*
 
-### Implementations
+## Implementations
+### Basics
+#### **Basic Stack**: `stack.h`
+- Template takes type T aka the type of the elements and also a type List\<T\>.
+The required method interface for `List` class is `push_front(const T&)`, 
+`pop_front(const T&)` and `size_t length()`. See lists below.
+
+| Method    |
+| -------- |
+| `bool push(const T&)`         |
+| `T pop()`                     |
+| `size_t size() const`         |
+
+#### **Basic Queue**: `stack.h`
+- Template takes type T aka the type of the elements and also a type List\<T\>. 
+The required method interface for `List` class is `T push_front(const T&)`, 
+`T pop_back(const T&)` and `size_t length()`. See lists below.
+
+| Method    |
+| -------- |
+| `bool enqueue(const T&)`      |
+| `T dequeue()`                 |
+| `size_t size() const`         |
+
+### Lists
 #### **Singley Linked List**: `linked_list.h`
-- Each node is allocated separately on the heap.
+- Each element is allocated separately on the heap.
+- Uses nodes with a value and next node unique_ptr.
+- Head node is managed via unique_ptr as well
 
 | Method    | Worst Case Complexly  |
 | -------- | ------- |
@@ -17,20 +44,30 @@ informing on this importance are correct. Correctness doesn't imply painless.*
 | `T pop_back()`                                 | $O(n)$ |
 | `T delete_at(size_t)`                          | $O(n)$ |
 | `bool contains(const T&) const`                | $O(n)$ |
-| `std::optinal<size_t> index_of(size_t) const`  | $O(n)$ |
+| `std::optinal<size_t> index_of(const T&) const`| $O(n)$ |
 | `size_t get_length() const`                    | $O(1)$ |
 | `T at(size_t) const`                           | $O(n)$ |
 | `T& operator[](size_t)`                        | $O(n)$ |
 | `std::string to_string(std::string_view)`      | $O(n)$ |
 
-#### **Basic Stack**: `stack.h`
-- Uses singley linked list to implement. Eventually I want to be able to choose the implementation detail with the template.
+#### **Array List**: `linked_list.h`
+- Each element is allocated continuously on the heap.
+- Uses heap arrays managed by unique_ptr.
 
 | Method    | Worst Case Complexly  |
 | -------- | ------- |
-| `bool push(const T&)`         | $O(1)$ |
-| `T pop()`                     | $O(1)$ |
-| `size_t size() const`         | $O(1)$ |
+| `bool push_front(const T&)`                    | $O(n)$ |
+| `bool push_back(const T&)`                     | $O(n)$ |
+| `bool insert(size_t, const T&)`                | $O(n)$ |
+| `T pop_front()`                                | $O(n)$ |
+| `T pop_back()`                                 | $O(n)$ |
+| `T delete_at(size_t)`                          | $O(n)$ |
+| `bool contains(const T&) const`                | $O(n)$ |
+| `std::optinal<size_t> index_of(const T&) const`| $O(n)$ |
+| `size_t get_length() const`                    | $O(1)$ |
+| `T at(size_t) const`                           | $O(1)$ |
+| `T& operator[](size_t)`                        | $O(1)$ |
+| `std::string to_string(std::string_view)`      | $O(n)$ |
 
 
 ### Project goals
