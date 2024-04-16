@@ -4,9 +4,7 @@
 #include <memory>
 #include <optional>
 #include <stdexcept>
-
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
+#include <sstream>
 
 template <typename T> class LinkedList;
 
@@ -200,7 +198,7 @@ public:
         return p->data_;
     }
 
-    std::string to_string(std::string_view sep = " ")
+    std::string to_string(std::string_view sep = " ") const
     {
         std::stringstream ss;
         LinkedListNode<T>* p = head_.get();

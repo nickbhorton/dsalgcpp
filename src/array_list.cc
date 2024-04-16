@@ -1,29 +1,19 @@
-#include "linked_list.h"
-#include <optional>
+#include "array_list.h"
 #include <stdexcept>
 
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-
-TEST_SUITE("LinkedList")
+TEST_SUITE("ArrayList")
 {
-    TEST_CASE("linked list node constructor and accessors")
+    TEST_CASE("array list can be default constructed")
     {
-        LinkedListNode<int> l(3);
-        CHECK(l.get_data() == 3);
-        CHECK(l.get_next() == nullptr);
-    }
-
-    TEST_CASE("linked list can be default constructed")
-    {
-        LinkedList<int> ll{};
+        ArrayList<int> ll{};
         REQUIRE(ll.get_length() == 0);
     }
 
     TEST_CASE("push_front adds an element at the front")
     {
-        LinkedList<int> ll{};
+        ArrayList<int> ll{};
         CHECK(ll.push_front(1));
         REQUIRE(ll.get_length() == 1);
         CHECK(ll.at(0) == 1);
@@ -40,12 +30,13 @@ TEST_SUITE("LinkedList")
 
     TEST_CASE("at accesor is bounds checked and it will throw")
     {
-        LinkedList<int> ll{};
+        ArrayList<int> ll{};
         CHECK_THROWS_AS(ll.at(3), std::out_of_range);
     }
+
     TEST_CASE("operator[] can also be used for access")
     {
-        LinkedList<int> ll{};
+        ArrayList<int> ll{};
         CHECK(ll.push_front(1));
         CHECK(ll.push_front(97));
         CHECK(ll.push_front(131));
@@ -57,7 +48,7 @@ TEST_SUITE("LinkedList")
 
     TEST_CASE("operator[] can mutate list")
     {
-        LinkedList<int> ll{};
+        ArrayList<int> ll{};
         CHECK(ll.push_front(1));
         CHECK(ll.push_front(97));
         CHECK(ll.push_front(131));
@@ -77,7 +68,7 @@ TEST_SUITE("LinkedList")
 
     TEST_CASE("push_back adds an element at the back")
     {
-        LinkedList<int> ll{};
+        ArrayList<int> ll{};
         CHECK(ll.push_back(1));
         REQUIRE(ll.get_length() == 1);
         CHECK(ll.at(0) == 1);
@@ -94,7 +85,7 @@ TEST_SUITE("LinkedList")
 
     TEST_CASE("pop_front removes and return element from the front")
     {
-        LinkedList<int> ll{};
+        ArrayList<int> ll{};
         CHECK(ll.push_back(1));
         CHECK(ll.push_back(97));
         CHECK(ll.push_back(131));
@@ -122,7 +113,7 @@ TEST_SUITE("LinkedList")
 
     TEST_CASE("pop_back removes and return element from the back")
     {
-        LinkedList<int> ll{};
+        ArrayList<int> ll{};
         CHECK(ll.push_back(1));
         CHECK(ll.push_back(97));
         CHECK(ll.push_back(131));
@@ -150,7 +141,7 @@ TEST_SUITE("LinkedList")
 
     TEST_CASE("constains returns true if element is in list")
     {
-        LinkedList<int> ll{};
+        ArrayList<int> ll{};
         for (int i = 0; i < 10; i += 2) {
             ll.push_back(i);
         }
@@ -166,7 +157,7 @@ TEST_SUITE("LinkedList")
 
     TEST_CASE("index_of returns and optinal index")
     {
-        LinkedList<int> ll{};
+        ArrayList<int> ll{};
         for (int i = 0; i < 10; i += 2) {
             ll.push_back(i);
         }
@@ -185,7 +176,7 @@ TEST_SUITE("LinkedList")
 
     TEST_CASE("delete_at removes and return element at index")
     {
-        LinkedList<int> ll{};
+        ArrayList<int> ll{};
         CHECK(ll.push_back(1));
         CHECK(ll.push_back(97));
         CHECK(ll.push_back(131));
@@ -230,7 +221,7 @@ TEST_SUITE("LinkedList")
 
     TEST_CASE("the to_string function allows seperator specification")
     {
-        LinkedList<int> ll{};
+        ArrayList<int> ll{};
         ll.push_back(1);
         ll.push_back(2);
         ll.push_back(3);
@@ -242,7 +233,7 @@ TEST_SUITE("LinkedList")
 
     TEST_CASE("move constructor and move operator are defined")
     {
-        LinkedList<int> ll1{};
+        ArrayList<int> ll1{};
         ll1.push_back(1);
         ll1.push_back(2);
         ll1.push_back(3);
@@ -250,13 +241,13 @@ TEST_SUITE("LinkedList")
         CHECK(ll1.get_length() == 4);
         CHECK(std::string("1 2 3 4") == ll1.to_string());
 
-        LinkedList<int> ll2(std::move(ll1));
+        ArrayList<int> ll2(std::move(ll1));
         CHECK(ll2.get_length() == 4);
         CHECK(ll1.get_length() == 0);
         CHECK(std::string("") == ll1.to_string());
         CHECK(std::string("1 2 3 4") == ll2.to_string());
 
-        LinkedList<int> ll3{};
+        ArrayList<int> ll3{};
         ll3 = std::move(ll2);
         CHECK(ll2.get_length() == 0);
         CHECK(ll3.get_length() == 4);
@@ -266,7 +257,7 @@ TEST_SUITE("LinkedList")
 
     TEST_CASE("insert adds an element at index")
     {
-        LinkedList<int> ll{};
+        ArrayList<int> ll{};
         ll.push_back(0);
         ll.push_back(2);
         ll.push_back(3);

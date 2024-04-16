@@ -1,22 +1,24 @@
 #ifndef STACK_HEADER
 #define STACK_HEADER
-#include "linked_list.h"
 
-template <typename T> class Stack
+#include "doctest.h"
+
+#include <cstddef>
+template <typename T, typename Storage> class Stack
 {
-    LinkedList<T> ll;
+    Storage s;
 
 public:
-    Stack() : ll() {}
+    Stack() : s() {}
 
     bool push(const T& val) {
-        return ll.push_front(val);
+        return s.push_front(val);
     }
     T pop() {
-        return ll.pop_front();
+        return s.pop_front();
     }
     size_t size() const {
-        return ll.get_length();
+        return s.get_length();
     }
 };
 
