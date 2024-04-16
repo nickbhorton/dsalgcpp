@@ -1,15 +1,4 @@
-<b>
-<table>
-    <tr>
-        <td>
-            main branch
-        </td>
-        <td>
-            <a href="https://github.com/nickbhorton/dsalgcpp/actions?query=branch%3Amain"><img src="https://github.com/doctest/doctest/workflows/CI/badge.svg?branch=master"></a>
-        </td>
-    </tr>
-</table>
-</b>
+![example workflow](https://github.com/nickbhorton/dsalgcpp/actions/workflows/cmake-single-platform.yml/badge.svg)
 
 *In the world of a computer science student the importance of data structures 
 and algorithms is repeatedly beaten into you. To be fair, teachers and mentors 
