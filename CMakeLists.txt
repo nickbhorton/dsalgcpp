@@ -12,6 +12,7 @@ add_compile_options(
 
 include(FetchContent)
 find_package(Git REQUIRED)
+find_package(Matplot++ REQUIRED)
 
 FetchContent_Declare(
     doctest
@@ -27,12 +28,23 @@ set(DOCTEST_INCLUDE_DIR ${CMAKE_BINARY_DIR}/doctest/doctest)
 
 include(${CMAKE_BINARY_DIR}/doctest/scripts/cmake/doctest.cmake)
 
+add_executable(
+    graphing
+    tests/graphing.cc
+)
+target_link_libraries(
+    graphing
+    matplot
+)
+
 add_executable(tests 
     tests/linked_list.cc 
     tests/array_list.cc
     tests/stack.cc
     tests/queue.cc
     tests/binary_tree.cc
+    tests/binary_search_tree.cc
+    tests/sorting.cc
 )
 target_include_directories(tests PUBLIC ${DOCTEST_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/src)
 
