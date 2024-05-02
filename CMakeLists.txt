@@ -37,6 +37,11 @@ target_link_libraries(
     matplot
 )
 
+add_executable(
+    fib 
+    tests/fibonacci.cc
+)
+
 add_executable(tests 
     tests/linked_list.cc 
     tests/array_list.cc
